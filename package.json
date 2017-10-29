@@ -2,7 +2,7 @@
   "name": "vscode-json",
   "displayName": "vscode-json",
   "description": "Beautify/Uglify/Escape/Unescape JSON",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "andyyaldoo",
   "engines": {
     "vscode": "^1.17.0"
@@ -15,7 +15,8 @@
   ],
   "main": "./out/extension",
   "contributes": {
-    "commands": [{
+    "commands": [
+      {
         "command": "extension.validateJson",
         "title": "Validate",
         "category": "vscode-json"
@@ -29,7 +30,6 @@
         "command": "extension.unescapeJson",
         "title": "Unescape",
         "category": "vscode-json"
-        
       },
       {
         "command": "extension.beautifyJson",
