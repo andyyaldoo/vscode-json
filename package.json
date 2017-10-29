@@ -1,54 +1,59 @@
 {
-    "name": "vscode-json",
-    "displayName": "vscode-json",
-    "description": "Beautify/Uglify/Escape/Unescape JSON",
-    "version": "0.0.1",
-    "publisher": "andyyaldoo",
-    "engines": {
-        "vscode": "^1.17.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onLanguage:json"
-    ],
-    "main": "./out/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.validateJson",
-                "title": "Validate JSON"
-            },
-            {
-              "command": "extension.escapeJson",
-              "title": "Escape JSON"
-            },
-            {
-              "command": "extension.unescapeJson",
-              "title": "Unescape JSON"
-            },
-            {
-              "command": "extension.beautifyJson",
-              "title": "Beautify JSON"
-            },
-            {
-              "command": "extension.uglifyJson",
-              "title": "Uglify JSON"
-            }
-        ]
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.5.3",
-        "vscode": "^1.1.5",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    }
+  "name": "vscode-json",
+  "displayName": "vscode-json",
+  "description": "Beautify/Uglify/Escape/Unescape JSON",
+  "version": "0.0.1",
+  "publisher": "andyyaldoo",
+  "engines": {
+    "vscode": "^1.17.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:json"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [{
+        "command": "extension.validateJson",
+        "title": "Validate",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.escapeJson",
+        "title": "Escape",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.unescapeJson",
+        "title": "Unescape",
+        "category": "vscode-json"
+        
+      },
+      {
+        "command": "extension.beautifyJson",
+        "title": "Beautify",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.uglifyJson",
+        "title": "Uglify",
+        "category": "vscode-json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3",
+    "vscode": "^1.1.5",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  }
 }

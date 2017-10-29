@@ -7,31 +7,24 @@ import {
   TextDocument, 
   Position, 
   Range, 
-  FormattingOptions, 
-  TextEditorOptions, 
-  extensions
+  extensions,
+  TextEditor
 } from 'vscode'
 
 export function activate(context: ExtensionContext) {
 
+  console.log("extension active")
   
   let jsonHelper = new JsonHelper()
   
-  // NOTE: Get active editor
-  let editor = window.activeTextEditor
-  if (!editor) {
-    // NOTE: If not found, do nothing
-    return 
-  }
-  
-  // NOTE: Get the document
-  let doc = editor.document;
+ 
 
   /**
    * This function is used to set the current document text
    * @param newText 
    */
-  let setText = (newText) => {
+  let setText = (editor: TextEditor, newText: string) => {
+    let doc = editor.document
     editor.edit(builder => {
       const lastLine = doc.lineAt(doc.lineCount-1)
 
@@ -46,6 +39,15 @@ export function activate(context: ExtensionContext) {
    * 
    */
   let validateJson = commands.registerCommand('extension.validateJson', () => {
+     // NOTE: Get active editor
+    let editor = window.activeTextEditor
+    if (!editor) {
+      // NOTE: If not found, do nothing
+      return 
+    }
+    
+    // NOTE: Get the document
+    let doc = editor.document;
     let text = doc.getText()
     jsonHelper.isValid(text) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
   });
@@ -54,10 +56,19 @@ export function activate(context: ExtensionContext) {
    * 
    */
   let escapeJson = commands.registerCommand('extension.escapeJson', () => {
+     // NOTE: Get active editor
+    let editor = window.activeTextEditor
+    if (!editor) {
+      // NOTE: If not found, do nothing
+      return 
+    }
+    
+    // NOTE: Get the document
+    let doc = editor.document;
     let text = doc.getText()
     
     let escapedJson = jsonHelper.escape(text)
-    setText(escapedJson)
+    setText(editor, escapedJson)
   })
 
   /**
@@ -65,21 +76,39 @@ export function activate(context: ExtensionContext) {
    */
   let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
 
+    // NOTE: Get active editor
+    let editor = window.activeTextEditor
+    if (!editor) {
+      // NOTE: If not found, do nothing
+      return 
+    }
+    
+    // NOTE: Get the document
+    let doc = editor.document;
     let text = doc.getText()
     let unescapedJson = jsonHelper.unescape(text)
-    setText(unescapedJson)
+    setText(editor, unescapedJson)
   })
 
   /**
    * 
    */
   let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
+    // NOTE: Get active editor
+    let editor = window.activeTextEditor
+    if (!editor) {
+      // NOTE: If not found, do nothing
+      return 
+    }
+    
+    // NOTE: Get the document
+    let doc = editor.document;
 
     let text = doc.getText()
     let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
     let beautifiedJson = jsonHelper.beautify(text, tabSize)
 
-    setText(beautifiedJson)
+    setText(editor, beautifiedJson)
   })
 
   /**
@@ -87,9 +116,18 @@ export function activate(context: ExtensionContext) {
    */
   let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
 
+    // NOTE: Get active editor
+    let editor = window.activeTextEditor
+    if (!editor) {
+      // NOTE: If not found, do nothing
+      return 
+    }
+    
+    // NOTE: Get the document
+    let doc = editor.document;
     let text = doc.getText()
     let uglifiedJson = jsonHelper.uglify(text)
-    setText(uglifiedJson)
+    setText(editor, uglifiedJson)
   })
 
   context.subscriptions.push(jsonHelper)
