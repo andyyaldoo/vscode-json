@@ -15,6 +15,38 @@
   ],
   "main": "./out/extension",
   "contributes": {
+    "keybindings":[
+      {
+        "command": "extension.validateJson",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v"
+      },
+      {
+        "command": "extension.escapeJson",
+        "key": "ctrl+alt+'",
+        "mac": "cmd+alt+'"
+      },
+      {
+        "command": "extension.unescapeJson",
+        "key": "ctrl+alt+;",
+        "mac": "cmd+alt+;"
+      },
+      {
+        "command": "extension.beautifyJson",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b"
+      },
+      {
+        "command": "extension.uglifyJson",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u"
+      },
+      {
+        "command": "extension.validateJson",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v"
+      }
+    ],
     "commands": [
       {
         "command": "extension.validateJson",
