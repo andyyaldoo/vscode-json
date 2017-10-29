@@ -11,14 +11,30 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onLanguage:json"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "extension.validateJson",
+                "title": "Validate JSON"
+            },
+            {
+              "command": "extension.escapeJson",
+              "title": "Escape JSON"
+            },
+            {
+              "command": "extension.unescapeJson",
+              "title": "Unescape JSON"
+            },
+            {
+              "command": "extension.beautifyJson",
+              "title": "Beautify JSON"
+            },
+            {
+              "command": "extension.uglifyJson",
+              "title": "Uglify JSON"
             }
         ]
     },

@@ -1,83 +1,179 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import {ExtensionContext, commands, window, TextDocument} from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import {
+  ExtensionContext, 
+  commands, 
+  window, 
+  TextDocument, 
+  Position, 
+  Range, 
+  FormattingOptions, 
+  TextEditorOptions, 
+  extensions
+} from 'vscode'
+
 export function activate(context: ExtensionContext) {
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "json" is now active!');
+  
+  let jsonHelper = new JsonHelper()
+  
+  // NOTE: Get active editor
+  let editor = window.activeTextEditor
+  if (!editor) {
+    // NOTE: If not found, do nothing
+    return 
+  }
+  
+  // NOTE: Get the document
+  let doc = editor.document;
+  if (doc.languageId === "json") {
 
-    let jsonHelper = new JsonHelper()
+    
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = commands.registerCommand('extension.validateJson', () => {
-        // The code you place here will be executed every time your command is executed
+    /**
+     * This function is used to set the current document text
+     * @param newText 
+     */
+    let setText = (newText) => {
+      editor.edit(builder => {
+        const lastLine = doc.lineAt(doc.lineCount-1)
 
-        
+        const start = new Position(0, 0);
+        const end = new Position(doc.lineCount-1, lastLine.text.length);
+
+        builder.replace(new Range(start, end), newText);
+      })
+    }
+
+    /**
+     * 
+     */
+    let validateJson = commands.registerCommand('extension.validateJson', () => {
+      let text = doc.getText()
+      jsonHelper.isValid(text) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
     });
+
+    /**
+     * 
+     */
+    let escapeJson = commands.registerCommand('extension.escapeJson', () => {
+      let text = doc.getText()
+      
+        let escapedJson = jsonHelper.escape(text)
+        setText(escapedJson)
+    })
+
+    /**
+     * 
+     */
+    let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
+
+      let text = doc.getText()
+      let unescapedJson = jsonHelper.unescape(text)
+        setText(unescapedJson)
+    })
+
+    /**
+     * 
+     */
+    let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
+
+      let text = doc.getText()
+      let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
+        let beautifiedJson = jsonHelper.beautify(text, tabSize)
+
+        setText(beautifiedJson)
+    })
+
+    /**
+     * 
+     */
+    let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
+
+      let text = doc.getText()
+      let uglifiedJson = jsonHelper.uglify(text)
+        setText(uglifiedJson)
+    })
+
     context.subscriptions.push(jsonHelper)
-    context.subscriptions.push(disposable);
+    context.subscriptions.push(validateJson);
+    context.subscriptions.push(beautifyJson);
+    context.subscriptions.push(uglifyJson);
+    context.subscriptions.push(escapeJson);
+    context.subscriptions.push(unescapeJson);
+  } else {
+    window.showWarningMessage("Please set the language to json")
+  }
 }
 
 
+/**
+ * 
+ */
 export class JsonHelper {
-  public validateJson() {
-
-    // NOTE: Get active editor
-    let editor = window.activeTextEditor
-    if (!editor) {
-      return // NOTE: If not found, do nothing
-    }
-
-    let doc = editor.document;
-
-    if (doc.languageId === "json") {
-      let text = doc.getText()
-      
-      if (this.isValid(text)) {
-        window.showInformationMessage('Valid JSON');
-      } else {
-        window.showInformationMessage('Invalid JSON');
-      }
-      
-    } else {
-      return // NOTE: if not json, do nothing 
-    }
-  }
-
+  /**
+   * 
+   * @param text 
+   */
   public isValid(text: string): boolean {
+    console.log("isValid is called")
     try {
       return typeof JSON.parse(text) === "object"
     } catch(err) {
-      console.log(err)
       return false
     }
   }
 
+  /**
+   * 
+   * @param text 
+   */
   public escape(text: string): string {
+    console.log("escape is called")
     return this.isValid(text) ? JSON.stringify(text) : text
   }
 
+  /**
+   * 
+   * @param text 
+   */
   public unescape(text: string): string {
-    return this.isValid(text) ? JSON.parse(text) : text
+    console.log("unescape is called")
+    try {
+      return JSON.parse(text)
+    } catch(err) {
+      console.log(err)
+      return text;
+    }
   }
 
-  public beautify(text: string): string {
-    return JSON.stringify(JSON.parse(text), null, 4)
+  /**
+   * 
+   * @param text 
+   * @param tabSize 
+   */
+  public beautify(text: string, tabSize?: number): string {
+    console.log("beautify is called")
+    return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, tabSize) : text
   }
-  public uglify(text: string): string {
-    return JSON.stringify(JSON.parse(text), null, 0)
-  }
-
-  dispose() {}
   
+  /**
+   * 
+   * @param text 
+   */
+  public uglify(text: string): string {
+    console.log("uglify is called")
+    return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, 0) : text
+  }
+
+  /**
+   * 
+   */
+  dispose() {}
 }
-// this method is called when your extension is deactivated
+
+/**
+ * This method is called when this extension is deactivated
+ */
 export function deactivate() {
 }
