@@ -26,86 +26,79 @@ export function activate(context: ExtensionContext) {
   
   // NOTE: Get the document
   let doc = editor.document;
-  if (doc.languageId === "json") {
 
-    
+  /**
+   * This function is used to set the current document text
+   * @param newText 
+   */
+  let setText = (newText) => {
+    editor.edit(builder => {
+      const lastLine = doc.lineAt(doc.lineCount-1)
 
-    /**
-     * This function is used to set the current document text
-     * @param newText 
-     */
-    let setText = (newText) => {
-      editor.edit(builder => {
-        const lastLine = doc.lineAt(doc.lineCount-1)
+      const start = new Position(0, 0);
+      const end = new Position(doc.lineCount-1, lastLine.text.length);
 
-        const start = new Position(0, 0);
-        const end = new Position(doc.lineCount-1, lastLine.text.length);
-
-        builder.replace(new Range(start, end), newText);
-      })
-    }
-
-    /**
-     * 
-     */
-    let validateJson = commands.registerCommand('extension.validateJson', () => {
-      let text = doc.getText()
-      jsonHelper.isValid(text) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
-    });
-
-    /**
-     * 
-     */
-    let escapeJson = commands.registerCommand('extension.escapeJson', () => {
-      let text = doc.getText()
-      
-        let escapedJson = jsonHelper.escape(text)
-        setText(escapedJson)
+      builder.replace(new Range(start, end), newText);
     })
-
-    /**
-     * 
-     */
-    let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
-
-      let text = doc.getText()
-      let unescapedJson = jsonHelper.unescape(text)
-        setText(unescapedJson)
-    })
-
-    /**
-     * 
-     */
-    let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
-
-      let text = doc.getText()
-      let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
-        let beautifiedJson = jsonHelper.beautify(text, tabSize)
-
-        setText(beautifiedJson)
-    })
-
-    /**
-     * 
-     */
-    let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
-
-      let text = doc.getText()
-      let uglifiedJson = jsonHelper.uglify(text)
-        setText(uglifiedJson)
-    })
-
-    context.subscriptions.push(jsonHelper)
-    context.subscriptions.push(validateJson);
-    context.subscriptions.push(beautifyJson);
-    context.subscriptions.push(uglifyJson);
-    context.subscriptions.push(escapeJson);
-    context.subscriptions.push(unescapeJson);
-  } else {
-    window.showWarningMessage("Please set the language to json")
   }
-}
 
+  /**
+   * 
+   */
+  let validateJson = commands.registerCommand('extension.validateJson', () => {
+    let text = doc.getText()
+    jsonHelper.isValid(text) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
+  });
+
+  /**
+   * 
+   */
+  let escapeJson = commands.registerCommand('extension.escapeJson', () => {
+    let text = doc.getText()
+    
+    let escapedJson = jsonHelper.escape(text)
+    setText(escapedJson)
+  })
+
+  /**
+   * 
+   */
+  let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
+
+    let text = doc.getText()
+    let unescapedJson = jsonHelper.unescape(text)
+    setText(unescapedJson)
+  })
+
+  /**
+   * 
+   */
+  let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
+
+    let text = doc.getText()
+    let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
+    let beautifiedJson = jsonHelper.beautify(text, tabSize)
+
+    setText(beautifiedJson)
+  })
+
+  /**
+   * 
+   */
+  let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
+
+    let text = doc.getText()
+    let uglifiedJson = jsonHelper.uglify(text)
+    setText(uglifiedJson)
+  })
+
+  context.subscriptions.push(jsonHelper)
+  context.subscriptions.push(validateJson);
+  context.subscriptions.push(beautifyJson);
+  context.subscriptions.push(uglifyJson);
+  context.subscriptions.push(escapeJson);
+  context.subscriptions.push(unescapeJson);
+}
 
 /**
  * 
