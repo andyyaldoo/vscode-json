@@ -1,6 +1,6 @@
 {
-    "name": "json",
-    "displayName": "json",
+    "name": "vscode-json",
+    "displayName": "vscode-json",
     "description": "Beautify/Uglify/Escape/Unescape JSON",
     "version": "0.0.1",
     "publisher": "andyyaldoo",
