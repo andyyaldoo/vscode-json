@@ -16,6 +16,9 @@ Install via vscode extensions marketplace
 * Escape: `cmd+alt+'`
 * Unescape: `cmd+alt+'`
 
+
+![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/vscode-json.gif)
+
 ## Requirements
 
 None
