@@ -10,6 +10,7 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import * as myExtension from '../extension';
+import {JsonHelper} from '../extension';
 
 // Defines a Mocha test suite to group tests of similar kind together
 suite("Extension Tests", () => {
@@ -20,3 +21,16 @@ suite("Extension Tests", () => {
         assert.equal(-1, [1, 2, 3].indexOf(0));
     });
 });
+
+suite("Validate JSON", () => {
+  let validJson = '{"name": "Andy","age": 21}'
+  let invalidJson = '{"name": "andy}'
+
+  let jsonHelper = new JsonHelper()
+
+
+  test("Validate JSON", () => {
+    assert.equal(jsonHelper.isValid(validJson), true, "Valid Json should return true")
+    assert.equal(jsonHelper.isValid(invalidJson), false, "Invalid Json should return false")
+  })
+})
