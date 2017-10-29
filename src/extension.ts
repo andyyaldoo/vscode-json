@@ -13,8 +13,6 @@ import {
 
 export function activate(context: ExtensionContext) {
 
-  console.log("extension active")
-  
   let jsonHelper = new JsonHelper()
   
  
@@ -147,7 +145,6 @@ export class JsonHelper {
    * @param text 
    */
   public isValid(text: string): boolean {
-    console.log("isValid is called")
     try {
       return typeof JSON.parse(text) === "object"
     } catch(err) {
@@ -160,7 +157,6 @@ export class JsonHelper {
    * @param text 
    */
   public escape(text: string): string {
-    console.log("escape is called")
     return this.isValid(text) ? JSON.stringify(text) : text
   }
 
@@ -169,11 +165,9 @@ export class JsonHelper {
    * @param text 
    */
   public unescape(text: string): string {
-    console.log("unescape is called")
     try {
       return JSON.parse(text)
     } catch(err) {
-      console.log(err)
       return text;
     }
   }
@@ -184,7 +178,6 @@ export class JsonHelper {
    * @param tabSize 
    */
   public beautify(text: string, tabSize?: number): string {
-    console.log("beautify is called")
     return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, tabSize) : text
   }
   
@@ -193,7 +186,6 @@ export class JsonHelper {
    * @param text 
    */
   public uglify(text: string): string {
-    console.log("uglify is called")
     return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, 0) : text
   }
 
