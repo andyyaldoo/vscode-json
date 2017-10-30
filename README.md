@@ -14,7 +14,7 @@ Install via vscode extensions marketplace
 * Beautify: `cmd+alt+b`
 * Uglify: `cmd+alt+u`
 * Escape: `cmd+alt+'`
-* Unescape: `cmd+alt+'`
+* Unescape: `cmd+alt+;`
 
 
 ![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/vscode-json.gif)
