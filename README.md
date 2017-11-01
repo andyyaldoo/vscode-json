@@ -8,6 +8,8 @@
 [![codecov](https://codecov.io/gh/andyyaldoo/vscode-json/branch/master/graph/badge.svg)](https://codecov.io/gh/andyyaldoo/vscode-json)
 
 
+[![release](https://img.shields.io/github/release/andyyaldoo/vscode-json.svg)](https://github.com/andyyaldoo/releases/latest)
+
 This vscode extension beautify/uglify/escape/unescape JSON.
 ## Features
 
