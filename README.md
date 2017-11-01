@@ -1,5 +1,13 @@
 # vscode-json README
 
+
+
+[![Build Status](https://travis-ci.org/andyyaldoo/vscode-json.svg?branch=travis)](https://travis-ci.org/andyyaldoo/vscode-json)
+
+
+[![codecov](https://codecov.io/gh/andyyaldoo/vscode-json/branch/master/graph/badge.svg)](https://codecov.io/gh/andyyaldoo/vscode-json)
+
+
 This vscode extension beautify/uglify/escape/unescape JSON.
 ## Features
 
