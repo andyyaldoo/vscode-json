@@ -14,7 +14,9 @@ This vscode extension beautify/uglify/escape/unescape JSON.
 There are existing of JSON prettifier/beautifier extensions but for some reason, Escape/Unescape JSON features are not included. I made yet another JSON tools because I use the escape/unescape feature a lot.
 
 ## Install
-Install via vscode extensions marketplace
+* Install via vscode extensions marketplace
+or
+* Download .vsix [here](https://github.com/andyyaldoo/vscode-json/releases)
 
 ## Usage
 
