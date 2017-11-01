@@ -3,17 +3,19 @@
 
 
 [![Build Status](https://travis-ci.org/andyyaldoo/vscode-json.svg?branch=travis)](https://travis-ci.org/andyyaldoo/vscode-json)
-
-
 [![codecov](https://codecov.io/gh/andyyaldoo/vscode-json/branch/master/graph/badge.svg)](https://codecov.io/gh/andyyaldoo/vscode-json)
-
-
-[![release](https://img.shields.io/github/release/andyyaldoo/vscode-json.svg)](https://github.com/andyyaldoo/releases/latest)
+[![release](https://img.shields.io/github/release/andyyaldoo/vscode-json.svg)](https://github.com/andyyaldoo/vscode-json/releases/latest)
+[![downloads](	https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](#)
+[![](https://img.shields.io/vscode-marketplace/v/andyyaldoo.vscode-json.svg)]()
+[![](https://img.shields.io/github/tag/andyyaldoo/vscode-json.svg)]()
+[![](https://img.shields.io/github/package-json/v/andyyaldoo/vscode-json.svg)]()
+[![](	https://img.shields.io/github/license/andyyaldoo/vscode-json.svg)]()
+[![](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)]()
 
 This vscode extension beautify/uglify/escape/unescape JSON.
 ## Features
 
-There are existing of JSON prettifier/beautifier extensions but for some reason, Escape/Unescape JSON features are not included. I made yet another JSON tools because I use the escape/unescape feature a lot.
+There are plenty of existing JSON prettifier/beautifier extensions but for some reason, Escape/Unescape JSON features are not included. I made yet another JSON tools because I use the escape/unescape feature a lot.
 
 ## Install
 * Install via vscode extensions marketplace
