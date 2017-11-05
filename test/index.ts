@@ -215,4 +215,3 @@ class CoverageRunner {
         });
     }
 }
-// TODO: Add travis.yml
