@@ -42,4 +42,8 @@ So far none
 
 Initial release of vscode-json. Covers the 4 basic functionalities (Beautify/Uglify/Escape/Unescape)
 
+
+### 1.1.4
+Improve Unescape functionality. JSON string does not have to be wrapped in quotes.
+
 -----------------------------------------------------------------------------------------------------------
