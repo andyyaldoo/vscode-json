@@ -11,7 +11,7 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:json"
+        "*"
     ],
     "main": "./out/extension",
     "contributes": {
