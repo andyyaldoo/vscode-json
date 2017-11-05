@@ -66,7 +66,9 @@ export function activate(context: ExtensionContext) {
     let text = doc.getText()
     
     let escapedJson = jsonHelper.escape(text)
-    setText(editor, escapedJson)
+    if (escapedJson !== text) {
+      setText(editor, escapedJson)
+    }
   })
 
   /**
@@ -106,7 +108,9 @@ export function activate(context: ExtensionContext) {
     let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
     let beautifiedJson = jsonHelper.beautify(text, tabSize)
 
-    setText(editor, beautifiedJson)
+    if (beautifiedJson !== text) {
+      setText(editor, beautifiedJson)
+    }
   })
 
   /**
@@ -125,7 +129,9 @@ export function activate(context: ExtensionContext) {
     let doc = editor.document;
     let text = doc.getText()
     let uglifiedJson = jsonHelper.uglify(text)
-    setText(editor, uglifiedJson)
+    if (uglifiedJson !== text) {
+      setText(editor, uglifiedJson)
+    }
   })
 
   context.subscriptions.push(jsonHelper)
