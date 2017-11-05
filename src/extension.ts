@@ -165,10 +165,20 @@ export class JsonHelper {
    * @param text 
    */
   public unescape(text: string): string {
+    let formattedText = text
     try {
-      return JSON.parse(text)
+
+      if (!text.startsWith('"')) {
+        formattedText = '"'.concat(formattedText)
+      }
+
+      if (!text.endsWith('"')) {
+        formattedText = formattedText.concat('"')
+      }
+
+      return JSON.parse(formattedText)
     } catch(err) {
-      return text;
+      return text
     }
   }
 
