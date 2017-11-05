@@ -157,7 +157,7 @@ export class JsonHelper {
    * @param text 
    */
   public escape(text: string): string {
-    return this.isValid(text) ? JSON.stringify(text) : text
+    return this.isValid(text) ? JSON.stringify(text).replace(/^"/g, '').replace(/"$/g, '') : text
   }
 
   /**
