@@ -2,10 +2,14 @@
     "name": "vscode-json",
     "displayName": "vscode-json",
     "description": "Beautify/Uglify/Escape/Unescape JSON",
-    "version": "1.0.4",
+    "version": "1.2.0",
     "publisher": "andyyaldoo",
     "engines": {
         "vscode": "^1.17.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andyyaldoo/vscode-json.git"
     },
     "categories": [
         "Other"
