@@ -3,7 +3,7 @@
 
 
 [![Build Status](https://travis-ci.org/andyyaldoo/vscode-json.svg?branch=travis)](https://travis-ci.org/andyyaldoo/vscode-json)
-[![downloads](	https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](#)
+[![downloads](https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](#)
 [![](https://img.shields.io/vscode-marketplace/v/andyyaldoo.vscode-json.svg)]()
 [![](https://img.shields.io/github/tag/andyyaldoo/vscode-json.svg)]()
 [![](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)]()
