@@ -8,14 +8,15 @@ import {
   Position, 
   Range, 
   extensions,
-  TextEditor
+  TextEditor,
+  workspace
 } from 'vscode'
 
-export function activate(context: ExtensionContext) {
+import JsonHelper from './JsonHelper'
 
-  let jsonHelper = new JsonHelper()
+export function activate(context: ExtensionContext) {
   
- 
+  let jsonHelper = new JsonHelper()
 
   /**
    * This function is used to set the current document text
@@ -34,102 +35,124 @@ export function activate(context: ExtensionContext) {
   }
 
   /**
-   * 
+   * validateJson
    */
   let validateJson = commands.registerCommand('extension.validateJson', () => {
      // NOTE: Get active editor
     let editor = window.activeTextEditor
     if (!editor) {
-      // NOTE: If not found, do nothing
       return 
     }
     
     // NOTE: Get the document
     let doc = editor.document;
-    let text = doc.getText()
-    jsonHelper.isValid(text) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
+    let text = doc.getText();
+
+    // NOTE: Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+
+    // NOTE: Determine whether JSON is valid or invalid
+    jsonHelper.isValid(trimmedText) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
   });
 
   /**
-   * 
+   * escapeJson
    */
   let escapeJson = commands.registerCommand('extension.escapeJson', () => {
      // NOTE: Get active editor
     let editor = window.activeTextEditor
+    
     if (!editor) {
-      // NOTE: If not found, do nothing
       return 
     }
     
     // NOTE: Get the document
     let doc = editor.document;
-    let text = doc.getText()
+    let text = doc.getText();
     
-    let escapedJson = jsonHelper.escape(text)
-    if (escapedJson !== text) {
+    // NOTE: Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+    
+    // NOTE: Escape JSON
+    let escapedJson = jsonHelper.escape(trimmedText)
+    if (escapedJson !== trimmedText) {
       setText(editor, escapedJson)
     }
   })
 
   /**
-   * 
+   * unescapeJson
    */
   let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
-
     // NOTE: Get active editor
     let editor = window.activeTextEditor
     if (!editor) {
-      // NOTE: If not found, do nothing
       return 
     }
     
     // NOTE: Get the document
     let doc = editor.document;
-    let text = doc.getText()
-    let unescapedJson = jsonHelper.unescape(text)
-    setText(editor, unescapedJson)
+    let text = doc.getText();
+
+    // NOTE: Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+
+    // NOTE: Unescape JSON
+    let unescapedJson = jsonHelper.unescape(trimmedText)
+
+    if (unescapedJson !== trimmedText) {
+      setText(editor, unescapedJson)
+    }
   })
 
   /**
-   * 
+   * beautifyJson
    */
   let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
     // NOTE: Get active editor
     let editor = window.activeTextEditor
     if (!editor) {
-      // NOTE: If not found, do nothing
       return 
     }
     
     // NOTE: Get the document
     let doc = editor.document;
-
     let text = doc.getText()
-    let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
-    let beautifiedJson = jsonHelper.beautify(text, tabSize)
 
-    if (beautifiedJson !== text) {
+    // NOTE: Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+    
+    // NOTE: Determine tabsize
+    let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
+
+    // NOTE: Beautify JSON
+    let beautifiedJson = jsonHelper.beautify(trimmedText, tabSize)
+    if (beautifiedJson !== trimmedText) {
       setText(editor, beautifiedJson)
     }
   })
 
   /**
-   * 
+   * uglifyJson
    */
   let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
 
     // NOTE: Get active editor
     let editor = window.activeTextEditor
     if (!editor) {
-      // NOTE: If not found, do nothing
       return 
     }
     
     // NOTE: Get the document
     let doc = editor.document;
     let text = doc.getText()
-    let uglifiedJson = jsonHelper.uglify(text)
-    if (uglifiedJson !== text) {
+
+    // NOTE: Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+
+    // NOTE: Uglify JSON
+    let uglifiedJson = jsonHelper.uglify(trimmedText)
+    if (uglifiedJson !== trimmedText) {
       setText(editor, uglifiedJson)
     }
   })
@@ -140,75 +163,6 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(uglifyJson);
   context.subscriptions.push(escapeJson);
   context.subscriptions.push(unescapeJson);
-}
-
-/**
- * 
- */
-export class JsonHelper {
-  /**
-   * 
-   * @param text 
-   */
-  public isValid(text: string): boolean {
-    try {
-      return typeof JSON.parse(text) === "object"
-    } catch(err) {
-      return false
-    }
-  }
-
-  /**
-   * 
-   * @param text 
-   */
-  public escape(text: string): string {
-    return this.isValid(text) ? JSON.stringify(text).replace(/^"/g, '').replace(/"$/g, '') : text
-  }
-
-  /**
-   * 
-   * @param text 
-   */
-  public unescape(text: string): string {
-    let formattedText = text
-    try {
-
-      if (!text.startsWith('"')) {
-        formattedText = '"'.concat(formattedText)
-      }
-
-      if (!text.endsWith('"')) {
-        formattedText = formattedText.concat('"')
-      }
-
-      return JSON.parse(formattedText)
-    } catch(err) {
-      return text
-    }
-  }
-
-  /**
-   * 
-   * @param text 
-   * @param tabSize 
-   */
-  public beautify(text: string, tabSize?: number): string {
-    return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, tabSize) : text
-  }
-  
-  /**
-   * 
-   * @param text 
-   */
-  public uglify(text: string): string {
-    return this.isValid(text) ? JSON.stringify(JSON.parse(text), null, 0) : text
-  }
-
-  /**
-   * 
-   */
-  dispose() {}
 }
 
 /**
