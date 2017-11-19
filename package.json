@@ -2,7 +2,7 @@
     "name": "vscode-json",
     "displayName": "vscode-json",
     "description": "Beautify/Uglify/Escape/Unescape JSON",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "publisher": "andyyaldoo",
     "engines": {
         "vscode": "^1.17.0"
@@ -17,7 +17,7 @@
     "activationEvents": [
         "*"
     ],
-    "main": "./out/extension",
+    "main": "./out/src/extension",
     "contributes": {
         "keybindings": [
             {
@@ -82,14 +82,14 @@
     "scripts": {
         "watch": "tsc -watch -p ./",
         "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
+        "compile": "tsc -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
+        "@types/glob": "^5.0.33",
         "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/glob": "^5.0.33",
         "decache": "^4.1.0",
         "glob": "^7.1.2",
         "istanbul": "^0.4.5",
