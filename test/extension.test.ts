@@ -8,9 +8,16 @@ import * as assert from 'assert';
 
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
-import * as vscode from 'vscode';
+import {
+  ExtensionContext,
+  commands,
+  workspace,
+  Uri,
+  window
+} from 'vscode';
 import * as myExtension from '../src/extension';
-import {JsonHelper} from '../src/extension';
+import JsonHelper from '../src/JsonHelper';
+import * as path from 'path';
 
 suite("Unit tests", () => {
   let validUglifiedUnescapedJson = '{"name":"Andy","age":21}'
@@ -21,8 +28,6 @@ suite("Unit tests", () => {
   let validBeautifiedJson4 = '{\n    "name": "Andy",\n    "age": 21\n}'
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}'
   let invalidJson = '{"name": "andy}'
-
-
 
   let jsonHelper = new JsonHelper()
   test("Validate JSON", () => {
