@@ -44,11 +44,6 @@
                 "command": "extension.uglifyJson",
                 "key": "ctrl+alt+u",
                 "mac": "cmd+alt+u"
-            },
-            {
-                "command": "extension.validateJson",
-                "key": "ctrl+alt+v",
-                "mac": "cmd+alt+v"
             }
         ],
         "commands": [
