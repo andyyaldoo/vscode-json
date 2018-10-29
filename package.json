@@ -1,95 +1,95 @@
 {
-    "name": "vscode-json",
-    "displayName": "vscode-json",
-    "description": "Beautify/Uglify/Escape/Unescape JSON",
-    "version": "1.3.0",
-    "publisher": "andyyaldoo",
-    "engines": {
-        "vscode": "^1.17.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/andyyaldoo/vscode-json.git"
-    },
-    "categories": [
-        "Other"
+  "name": "vscode-json",
+  "displayName": "vscode-json",
+  "description": "Beautify/Uglify/Escape/Unescape JSON",
+  "version": "1.3.0",
+  "publisher": "andyyaldoo",
+  "engines": {
+    "vscode": "^1.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andyyaldoo/vscode-json.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "keybindings": [
+      {
+        "command": "extension.validateJson",
+        "key": "ctrl+alt+v",
+        "mac": "cmd+alt+v"
+      },
+      {
+        "command": "extension.escapeJson",
+        "key": "ctrl+alt+'",
+        "mac": "cmd+alt+'"
+      },
+      {
+        "command": "extension.unescapeJson",
+        "key": "ctrl+alt+;",
+        "mac": "cmd+alt+;"
+      },
+      {
+        "command": "extension.beautifyJson",
+        "key": "ctrl+alt+b",
+        "mac": "cmd+alt+b"
+      },
+      {
+        "command": "extension.uglifyJson",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u"
+      }
     ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./out/src/extension",
-    "contributes": {
-        "keybindings": [
-            {
-                "command": "extension.validateJson",
-                "key": "ctrl+alt+v",
-                "mac": "cmd+alt+v"
-            },
-            {
-                "command": "extension.escapeJson",
-                "key": "ctrl+alt+'",
-                "mac": "cmd+alt+'"
-            },
-            {
-                "command": "extension.unescapeJson",
-                "key": "ctrl+alt+;",
-                "mac": "cmd+alt+;"
-            },
-            {
-                "command": "extension.beautifyJson",
-                "key": "ctrl+alt+b",
-                "mac": "cmd+alt+b"
-            },
-            {
-                "command": "extension.uglifyJson",
-                "key": "ctrl+alt+u",
-                "mac": "cmd+alt+u"
-            }
-        ],
-        "commands": [
-            {
-                "command": "extension.validateJson",
-                "title": "Validate",
-                "category": "vscode-json"
-            },
-            {
-                "command": "extension.escapeJson",
-                "title": "Escape",
-                "category": "vscode-json"
-            },
-            {
-                "command": "extension.unescapeJson",
-                "title": "Unescape",
-                "category": "vscode-json"
-            },
-            {
-                "command": "extension.beautifyJson",
-                "title": "Beautify",
-                "category": "vscode-json"
-            },
-            {
-                "command": "extension.uglifyJson",
-                "title": "Uglify",
-                "category": "vscode-json"
-            }
-        ]
-    },
-    "scripts": {
-        "watch": "tsc -watch -p ./",
-        "compile": "tsc -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/glob": "^5.0.33",
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "decache": "^4.1.0",
-        "glob": "^7.1.2",
-        "istanbul": "^0.4.5",
-        "mocha": "^4.0.1",
-        "remap-istanbul": "^0.8.4",
-        "typescript": "^2.5.3",
-        "vscode": "^1.1.21"
-    }
+    "commands": [
+      {
+        "command": "extension.validateJson",
+        "title": "Validate",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.escapeJson",
+        "title": "Escape",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.unescapeJson",
+        "title": "Unescape",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.beautifyJson",
+        "title": "Beautify",
+        "category": "vscode-json"
+      },
+      {
+        "command": "extension.uglifyJson",
+        "title": "Uglify",
+        "category": "vscode-json"
+      }
+    ]
+  },
+  "scripts": {
+    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/glob": "^5.0.33",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^7.0.43",
+    "decache": "^4.1.0",
+    "glob": "^7.1.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1",
+    "remap-istanbul": "^0.8.4",
+    "typescript": "^2.5.3",
+    "vscode": "^1.1.21"
+  }
 }

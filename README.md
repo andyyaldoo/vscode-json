@@ -11,19 +11,19 @@ There are plenty of existing JSON prettifier/beautifier extensions but for some 
 
 ## Install
 
-* Install via vscode extensions marketplace
+- Install via vscode extensions marketplace
 
 or
 
-* Download .vsix [here](https://github.com/andyyaldoo/vscode-json/releases)
+- Download .vsix [here](https://github.com/andyyaldoo/vscode-json/releases)
 
 ## Usage
 
-* Validate: `cmd+alt+v`
-* Beautify: `cmd+alt+b`
-* Uglify: `cmd+alt+u`
-* Escape: `cmd+alt+'`
-* Unescape: `cmd+alt+;`
+- Validate: `cmd+alt+v`
+- Beautify: `cmd+alt+b`
+- Uglify: `cmd+alt+u`
+- Escape: `cmd+alt+'`
+- Unescape: `cmd+alt+;`
 
 ![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/vscode-json.gif)
 
@@ -49,4 +49,4 @@ Improve Unescape functionality. JSON string does not have to be wrapped in quote
 
 Improve funcitonality. trim trailing and leading spaces before process text. Minor refactoring.
 
------------------------------------------------------------------------------------------------------------
+---

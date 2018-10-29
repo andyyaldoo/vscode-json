@@ -1,163 +1,170 @@
-'use strict';
+"use strict";
 
 import {
-  ExtensionContext, 
-  commands, 
-  window, 
-  TextDocument, 
-  Position, 
-  Range, 
+  ExtensionContext,
+  commands,
+  window,
+  TextDocument,
+  Position,
+  Range,
   extensions,
   TextEditor,
   workspace
-} from 'vscode'
+} from "vscode";
 
-import JsonHelper from './JsonHelper'
+import JsonHelper from "./JsonHelper";
 
 export function activate(context: ExtensionContext) {
-  
-  let jsonHelper = new JsonHelper()
+  let jsonHelper = new JsonHelper();
 
   /**
    * This function is used to set the current document text
-   * @param newText 
+   * @param newText
    */
   let setText = (editor: TextEditor, newText: string) => {
-    let doc = editor.document
+    let doc = editor.document;
     editor.edit(builder => {
-      const lastLine = doc.lineAt(doc.lineCount-1)
-
-      const start = new Position(0, 0);
-      const end = new Position(doc.lineCount-1, lastLine.text.length);
-
+      let start, end;
+      if (editor.selection.isEmpty) {
+        const lastLine = doc.lineAt(doc.lineCount - 1);
+        start = new Position(0, 0);
+        end = new Position(doc.lineCount - 1, lastLine.text.length);
+      } else {
+        start = editor.selection.start;
+        end = editor.selection.end;
+      }
       builder.replace(new Range(start, end), newText);
-    })
-  }
+    });
+  };
 
   /**
    * validateJson
    */
-  let validateJson = commands.registerCommand('extension.validateJson', () => {
-     // NOTE: Get active editor
-    let editor = window.activeTextEditor
+  let validateJson = commands.registerCommand("extension.validateJson", () => {
+    // NOTE: Get active editor
+    let editor = window.activeTextEditor;
     if (!editor) {
-      return 
+      return;
     }
-    
+
     // NOTE: Get the document
     let doc = editor.document;
-    let text = doc.getText();
+    let text = doc.getText(editor.selection) || doc.getText();
 
     // NOTE: Remove trailing and leading whitespace
-    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
     // NOTE: Determine whether JSON is valid or invalid
-    jsonHelper.isValid(trimmedText) ? window.showInformationMessage('Valid JSON') : window.showErrorMessage('Invalid JSON')
+    jsonHelper.isValid(trimmedText)
+      ? window.showInformationMessage("Valid JSON")
+      : window.showErrorMessage("Invalid JSON");
   });
 
   /**
    * escapeJson
    */
-  let escapeJson = commands.registerCommand('extension.escapeJson', () => {
-     // NOTE: Get active editor
-    let editor = window.activeTextEditor
-    
+  let escapeJson = commands.registerCommand("extension.escapeJson", () => {
+    // NOTE: Get active editor
+    let editor = window.activeTextEditor;
+
     if (!editor) {
-      return 
+      return;
     }
-    
+
     // NOTE: Get the document
     let doc = editor.document;
-    let text = doc.getText();
-    
+    let text = doc.getText(editor.selection) || doc.getText();
+
     // NOTE: Remove trailing and leading whitespace
-    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
-    
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
+
     // NOTE: Escape JSON
-    let escapedJson = jsonHelper.escape(trimmedText)
+    let escapedJson = jsonHelper.escape(trimmedText);
     if (escapedJson !== trimmedText) {
-      setText(editor, escapedJson)
+      setText(editor, escapedJson);
     }
-  })
+  });
 
   /**
    * unescapeJson
    */
-  let unescapeJson = commands.registerCommand('extension.unescapeJson', () => {
+  let unescapeJson = commands.registerCommand("extension.unescapeJson", () => {
     // NOTE: Get active editor
-    let editor = window.activeTextEditor
+    let editor = window.activeTextEditor;
     if (!editor) {
-      return 
+      return;
     }
-    
-    // NOTE: Get the document
+
+    // Get the document
     let doc = editor.document;
-    let text = doc.getText();
+    let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
-    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+    // Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Unescape JSON
-    let unescapedJson = jsonHelper.unescape(trimmedText)
+    // Unescape JSON
+    let unescapedJson = jsonHelper.unescape(trimmedText);
 
     if (unescapedJson !== trimmedText) {
-      setText(editor, unescapedJson)
+      setText(editor, unescapedJson);
     }
-  })
+  });
 
   /**
    * beautifyJson
    */
-  let beautifyJson = commands.registerCommand('extension.beautifyJson', () => {
-    // NOTE: Get active editor
-    let editor = window.activeTextEditor
+  let beautifyJson = commands.registerCommand("extension.beautifyJson", () => {
+    // Get active editor
+    let editor = window.activeTextEditor;
     if (!editor) {
-      return 
+      return;
     }
-    
-    // NOTE: Get the document
+
+    // Get the document
     let doc = editor.document;
-    let text = doc.getText()
+    let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
-    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
-    
-    // NOTE: Determine tabsize
-    let tabSize = typeof editor.options.tabSize == "string" ? undefined : editor.options.tabSize
+    // Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Beautify JSON
-    let beautifiedJson = jsonHelper.beautify(trimmedText, tabSize)
+    // Determine tabsize
+    let tabSize =
+      typeof editor.options.tabSize == "string"
+        ? undefined
+        : editor.options.tabSize;
+
+    // Beautify JSON
+    let beautifiedJson = jsonHelper.beautify(trimmedText, tabSize);
     if (beautifiedJson !== trimmedText) {
-      setText(editor, beautifiedJson)
+      setText(editor, beautifiedJson);
     }
-  })
+  });
 
   /**
    * uglifyJson
    */
-  let uglifyJson = commands.registerCommand('extension.uglifyJson', () => {
-
-    // NOTE: Get active editor
-    let editor = window.activeTextEditor
+  let uglifyJson = commands.registerCommand("extension.uglifyJson", () => {
+    // Get active editor
+    let editor = window.activeTextEditor;
     if (!editor) {
-      return 
+      return;
     }
-    
-    // NOTE: Get the document
+
+    // Get the document
     let doc = editor.document;
-    let text = doc.getText()
+    let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
-    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g,"");
+    // Remove trailing and leading whitespace
+    let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Uglify JSON
-    let uglifiedJson = jsonHelper.uglify(trimmedText)
+    // Uglify JSON
+    let uglifiedJson = jsonHelper.uglify(trimmedText);
     if (uglifiedJson !== trimmedText) {
-      setText(editor, uglifiedJson)
+      setText(editor, uglifiedJson);
     }
-  })
+  });
 
-  context.subscriptions.push(jsonHelper)
+  context.subscriptions.push(jsonHelper);
   context.subscriptions.push(validateJson);
   context.subscriptions.push(beautifyJson);
   context.subscriptions.push(uglifyJson);
@@ -168,5 +175,4 @@ export function activate(context: ExtensionContext) {
 /**
  * This method is called when this extension is deactivated
  */
-export function deactivate() {
-}
+export function deactivate() {}
