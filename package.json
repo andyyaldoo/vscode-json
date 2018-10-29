@@ -76,6 +76,7 @@
   },
   "scripts": {
     "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
