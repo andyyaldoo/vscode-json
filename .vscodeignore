@@ -6,3 +6,11 @@ src/**
 .gitignore
 tsconfig.json
 vsc-extension-quickstart.md
+coverage
+.travis.yml
+.editorconfig
+coverconfig.json
+images
+codecov.yml
+test/
+LICENSE
