@@ -32,6 +32,13 @@ export function activate(context: ExtensionContext) {
       } else {
         start = editor.selection.start;
         end = editor.selection.end;
+
+        // TODO: Refactor and Optimize
+        let extraSpaces = "";
+        for (let index = 0; index < start.character; index++) {
+          extraSpaces += " ";
+        }
+        newText = newText.replace(/\n/g, "\n" + extraSpaces);
       }
       builder.replace(new Range(start, end), newText);
     });
