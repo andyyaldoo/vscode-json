@@ -49,7 +49,7 @@ export default class {
    * @param text
    * @param tabSize
    */
-  public beautify(text: string, tabSize?: number): string {
+  public beautify(text: string, tabSize?: number | string): string {
     return this.isValid(text)
       ? JSON.stringify(JSON.parse(text), null, tabSize)
       : text;

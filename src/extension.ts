@@ -132,14 +132,12 @@ export function activate(context: ExtensionContext) {
     // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // Determine tabsize
-    let tabSize =
-      typeof editor.options.tabSize == "string"
-        ? undefined
-        : editor.options.tabSize;
-
     // Beautify JSON
-    let beautifiedJson = jsonHelper.beautify(trimmedText, tabSize);
+    let beautifiedJson = jsonHelper.beautify(
+      trimmedText,
+      // tabs vs spaces
+      editor.options.insertSpaces ? editor.options.tabSize : "\t"
+    );
     if (beautifiedJson !== trimmedText) {
       setText(editor, beautifiedJson);
     }
