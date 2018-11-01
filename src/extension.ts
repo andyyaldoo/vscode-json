@@ -4,12 +4,9 @@ import {
   ExtensionContext,
   commands,
   window,
-  TextDocument,
   Position,
   Range,
-  extensions,
-  TextEditor,
-  workspace
+  TextEditor
 } from "vscode";
 
 import JsonHelper from "./JsonHelper";
