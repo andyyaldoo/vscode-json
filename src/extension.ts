@@ -6,7 +6,8 @@ import {
   window,
   Position,
   Range,
-  TextEditor
+  TextEditor,
+  Selection
 } from "vscode";
 
 import JsonHelper from "./JsonHelper";
@@ -41,6 +42,9 @@ export function activate(context: ExtensionContext) {
       }
 
       builder.replace(new Range(start, end), newText);
+
+      // Select the whole json
+      editor.selection = new Selection(start, end);
     });
   };
 
