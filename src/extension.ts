@@ -32,13 +32,14 @@ export function activate(context: ExtensionContext) {
         start = editor.selection.start;
         end = editor.selection.end;
 
-        // TODO: Refactor and Optimize
-        let extraSpaces = "";
-        for (let index = 0; index < start.character; index++) {
-          extraSpaces += " ";
-        }
-        newText = newText.replace(/\n/g, "\n" + extraSpaces);
+        // tabs vs spaces
+        let tabStyle = editor.options.insertSpaces ? " " : "\t";
+        newText = newText.replace(
+          /(\n)/g,
+          "$1" + tabStyle.repeat(start.character)
+        );
       }
+
       builder.replace(new Range(start, end), newText);
     });
   };
