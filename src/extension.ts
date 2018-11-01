@@ -22,6 +22,8 @@ export function activate(context: ExtensionContext) {
     let doc = editor.document;
     editor.edit(builder => {
       let start, end;
+
+      // Format whole file or selected text
       if (editor.selection.isEmpty) {
         const lastLine = doc.lineAt(doc.lineCount - 1);
         start = new Position(0, 0);
@@ -45,20 +47,20 @@ export function activate(context: ExtensionContext) {
    * validateJson
    */
   let validateJson = commands.registerCommand("extension.validateJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
     if (!editor) {
       return;
     }
 
-    // NOTE: Get the document
+    // Get the document
     let doc = editor.document;
     let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
+    // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Determine whether JSON is valid or invalid
+    // Determine whether JSON is valid or invalid
     jsonHelper.isValid(trimmedText)
       ? window.showInformationMessage("Valid JSON")
       : window.showErrorMessage("Invalid JSON");
@@ -68,21 +70,20 @@ export function activate(context: ExtensionContext) {
    * escapeJson
    */
   let escapeJson = commands.registerCommand("extension.escapeJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
-
     if (!editor) {
       return;
     }
 
-    // NOTE: Get the document
+    // Get the document
     let doc = editor.document;
     let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
+    // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Escape JSON
+    // Escape JSON
     let escapedJson = jsonHelper.escape(trimmedText);
     if (escapedJson !== trimmedText) {
       setText(editor, escapedJson);
@@ -93,7 +94,7 @@ export function activate(context: ExtensionContext) {
    * unescapeJson
    */
   let unescapeJson = commands.registerCommand("extension.unescapeJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
     if (!editor) {
       return;
