@@ -10,7 +10,7 @@ import {
   Selection
 } from "vscode";
 
-import JsonHelper from "./JsonHelper";
+import JsonHelper from "./json-helper";
 
 export function activate(context: ExtensionContext) {
   let jsonHelper = new JsonHelper();
