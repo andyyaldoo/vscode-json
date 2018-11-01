@@ -16,24 +16,23 @@ suite("Unit tests", () => {
   let validUglifiedEscapedJson = '{\\"name\\":\\"Andy\\",\\"age\\":21}';
   let validUglifiedEscapedJsonString = '"{\\"name\\":\\"Andy\\",\\"age\\":21}"';
   let validUglifiedEscapedJsonStringWithEndingQuote =
-  '{\\"name\\":\\"Andy\\",\\"age\\":21}"';
+    '{\\"name\\":\\"Andy\\",\\"age\\":21}"';
   let validUglifiedEscapedJsonStringWithStartingQuote =
-  '"{\\"name\\":\\"Andy\\",\\"age\\":21}';
+    '"{\\"name\\":\\"Andy\\",\\"age\\":21}';
   let validBeautifiedJson4 = '{\n    "name": "Andy",\n    "age": 21\n}';
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}';
   let invalidJson = '{"name": "andy}';
 
   assert.equal(
-      jsonHelper.isValid(validUglifiedUnescapedJson),
-      true,
-      "Valid Json should return true"
-    );
-    assert.equal(
-      jsonHelper.isValid(invalidJson),
-      false,
-      "Invalid Json should return false"
-    );
-  });
+    jsonHelper.isValid(validUglifiedUnescapedJson),
+    true,
+    "Valid Json should return true"
+  );
+  assert.equal(
+    jsonHelper.isValid(invalidJson),
+    false,
+    "Invalid Json should return false"
+  );
 
   test("Beautify JSON", () => {
     assert.equal(
