@@ -41,6 +41,7 @@ export function activate(context: ExtensionContext) {
         );
       }
 
+      // replace text
       builder.replace(new Range(start, end), newText);
 
       // Select the whole json
