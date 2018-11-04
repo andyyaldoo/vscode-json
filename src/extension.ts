@@ -4,15 +4,13 @@ import {
   ExtensionContext,
   commands,
   window,
-  TextDocument,
   Position,
   Range,
-  extensions,
   TextEditor,
-  workspace
+  Selection
 } from "vscode";
 
-import JsonHelper from "./JsonHelper";
+import JsonHelper from "./json-helper";
 
 export function activate(context: ExtensionContext) {
   let jsonHelper = new JsonHelper();
@@ -25,6 +23,8 @@ export function activate(context: ExtensionContext) {
     let doc = editor.document;
     editor.edit(builder => {
       let start, end;
+
+      // Format whole file or selected text
       if (editor.selection.isEmpty) {
         const lastLine = doc.lineAt(doc.lineCount - 1);
         start = new Position(0, 0);
@@ -33,7 +33,12 @@ export function activate(context: ExtensionContext) {
         start = editor.selection.start;
         end = editor.selection.end;
       }
+
+      // replace text
       builder.replace(new Range(start, end), newText);
+
+      // Select the whole json
+      editor.selection = new Selection(start, end);
     });
   };
 
@@ -41,20 +46,20 @@ export function activate(context: ExtensionContext) {
    * validateJson
    */
   let validateJson = commands.registerCommand("extension.validateJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
     if (!editor) {
       return;
     }
 
-    // NOTE: Get the document
+    // Get the document
     let doc = editor.document;
     let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
+    // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Determine whether JSON is valid or invalid
+    // Determine whether JSON is valid or invalid
     jsonHelper.isValid(trimmedText)
       ? window.showInformationMessage("Valid JSON")
       : window.showErrorMessage("Invalid JSON");
@@ -64,21 +69,20 @@ export function activate(context: ExtensionContext) {
    * escapeJson
    */
   let escapeJson = commands.registerCommand("extension.escapeJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
-
     if (!editor) {
       return;
     }
 
-    // NOTE: Get the document
+    // Get the document
     let doc = editor.document;
     let text = doc.getText(editor.selection) || doc.getText();
 
-    // NOTE: Remove trailing and leading whitespace
+    // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // NOTE: Escape JSON
+    // Escape JSON
     let escapedJson = jsonHelper.escape(trimmedText);
     if (escapedJson !== trimmedText) {
       setText(editor, escapedJson);
@@ -89,7 +93,7 @@ export function activate(context: ExtensionContext) {
    * unescapeJson
    */
   let unescapeJson = commands.registerCommand("extension.unescapeJson", () => {
-    // NOTE: Get active editor
+    // Get active editor
     let editor = window.activeTextEditor;
     if (!editor) {
       return;
@@ -127,15 +131,23 @@ export function activate(context: ExtensionContext) {
     // Remove trailing and leading whitespace
     let trimmedText = text.trim().replace(/(?:^[\n\t\r]|[\n\t\r]$)/g, "");
 
-    // Determine tabsize
-    let tabSize =
-      typeof editor.options.tabSize == "string"
-        ? undefined
-        : editor.options.tabSize;
-
     // Beautify JSON
-    let beautifiedJson = jsonHelper.beautify(trimmedText, tabSize);
+    let beautifiedJson = jsonHelper.beautify(
+      trimmedText,
+      // tabs vs spaces
+      editor.options.insertSpaces ? editor.options.tabSize : "\t"
+    );
     if (beautifiedJson !== trimmedText) {
+      // tabs vs spaces
+      let tabStyle = editor.options.insertSpaces ? " " : "\t";
+
+      if (!editor.selection.isEmpty) {
+        let start = editor.selection.start;
+        beautifiedJson = beautifiedJson.replace(
+          /(\n)/g,
+          "$1" + tabStyle.repeat(start.character)
+        );
+      }
       setText(editor, beautifiedJson);
     }
   });

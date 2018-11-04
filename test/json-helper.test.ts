@@ -8,9 +8,10 @@ import * as assert from "assert";
 
 // You can import and use all API from the 'vscode' module
 // as well as import your extension to test it
-import JsonHelper from "../src/JsonHelper";
+import JsonHelper from "../src/json-helper";
 
 suite("Unit tests", () => {
+  let jsonHelper = new JsonHelper();
   let validUglifiedUnescapedJson = '{"name":"Andy","age":21}';
   let validUglifiedEscapedJson = '{\\"name\\":\\"Andy\\",\\"age\\":21}';
   let validUglifiedEscapedJsonString = '"{\\"name\\":\\"Andy\\",\\"age\\":21}"';
@@ -22,7 +23,6 @@ suite("Unit tests", () => {
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}';
   let invalidJson = '{"name": "andy}';
 
-  let jsonHelper = new JsonHelper();
   test("Validate JSON", () => {
     assert.equal(
       jsonHelper.isValid(validUglifiedUnescapedJson),
