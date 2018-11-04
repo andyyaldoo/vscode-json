@@ -32,13 +32,6 @@ export function activate(context: ExtensionContext) {
       } else {
         start = editor.selection.start;
         end = editor.selection.end;
-
-        // tabs vs spaces
-        let tabStyle = editor.options.insertSpaces ? " " : "\t";
-        newText = newText.replace(
-          /(\n)/g,
-          "$1" + tabStyle.repeat(start.character)
-        );
       }
 
       // replace text
@@ -145,6 +138,16 @@ export function activate(context: ExtensionContext) {
       editor.options.insertSpaces ? editor.options.tabSize : "\t"
     );
     if (beautifiedJson !== trimmedText) {
+      // tabs vs spaces
+      let tabStyle = editor.options.insertSpaces ? " " : "\t";
+
+      if (!editor.selection.isEmpty) {
+        let start = editor.selection.start;
+        beautifiedJson = beautifiedJson.replace(
+          /(\n)/g,
+          "$1" + tabStyle.repeat(start.character)
+        );
+      }
       setText(editor, beautifiedJson);
     }
   });
