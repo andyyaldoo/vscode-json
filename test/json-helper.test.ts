@@ -23,16 +23,18 @@ suite("Unit tests", () => {
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}';
   let invalidJson = '{"name": "andy}';
 
-  assert.equal(
-    jsonHelper.isValid(validUglifiedUnescapedJson),
-    true,
-    "Valid Json should return true"
-  );
-  assert.equal(
-    jsonHelper.isValid(invalidJson),
-    false,
-    "Invalid Json should return false"
-  );
+  test("Validate JSON", () => {
+    assert.equal(
+      jsonHelper.isValid(validUglifiedUnescapedJson),
+      true,
+      "Valid Json should return true"
+    );
+    assert.equal(
+      jsonHelper.isValid(invalidJson),
+      false,
+      "Invalid Json should return false"
+    );
+  });
 
   test("Beautify JSON", () => {
     assert.equal(
