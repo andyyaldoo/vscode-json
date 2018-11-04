@@ -5,7 +5,6 @@
 ![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/andyyaldoo/vscode-json/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyyaldoo/vscode-json?targetFile=package.json)
 
-
 This vscode extension beautify/uglify/escape/unescape JSON.
 
 ## Features
@@ -51,5 +50,9 @@ Improve Unescape functionality. JSON string does not have to be wrapped in quote
 ### 1.3.0
 
 Improve funcitonality. trim trailing and leading spaces before process text. Minor refactoring.
+
+### 1.4.0
+
+Format Selected text
 
 ---
