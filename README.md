@@ -55,6 +55,6 @@ Improve funcitonality. trim trailing and leading spaces before process text. Min
 
 Format Selected text
 
-![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/format-seleted-text.gif)
+![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/format-selected-text.gif)
 
 ---
