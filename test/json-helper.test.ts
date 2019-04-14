@@ -12,6 +12,7 @@ import JsonHelper from "../src/json-helper";
 
 suite("Unit tests", () => {
   let jsonHelper = new JsonHelper();
+
   let validUglifiedUnescapedJson = '{"name":"Andy","age":21}';
   let validUglifiedEscapedJson = '{\\"name\\":\\"Andy\\",\\"age\\":21}';
   let validUglifiedEscapedJsonString = '"{\\"name\\":\\"Andy\\",\\"age\\":21}"';
@@ -19,6 +20,7 @@ suite("Unit tests", () => {
     '{\\"name\\":\\"Andy\\",\\"age\\":21}"';
   let validUglifiedEscapedJsonStringWithStartingQuote =
     '"{\\"name\\":\\"Andy\\",\\"age\\":21}';
+
   let validBeautifiedJson4 = '{\n    "name": "Andy",\n    "age": 21\n}';
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}';
   let invalidJson = '{"name": "andy}';
