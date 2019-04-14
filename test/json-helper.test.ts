@@ -23,6 +23,11 @@ suite("Unit tests", () => {
   let validBeautifiedJson2 = '{\n  "name": "Andy",\n  "age": 21\n}';
   let invalidJson = '{"name": "andy}';
 
+  let uglifiedBigNumberJSON = `{"id1":365247355169013770,"id2":367559095164600330}`
+  let beautifiedBigNumberJSON = `\n  {"id1": 365247355169013770,\n  "id2": 367559095164600330\n}`
+  let uglifiedEscapedBigNumberJSON =`{\\"id1\\":365247355169013770,\\"id2\\":367559095164600330}`
+  let beautifiedEscapedBigNumberJSON = `\n  {\"id1\": 365247355169013770,\n  \"id2\": 367559095164600330\n}`
+
   test("Validate JSON", () => {
     assert.equal(
       jsonHelper.isValid(validUglifiedUnescapedJson),
@@ -33,6 +38,16 @@ suite("Unit tests", () => {
       jsonHelper.isValid(invalidJson),
       false,
       "Invalid Json should return false"
+    );
+
+    assert.equal(
+      jsonHelper.isValid(uglifiedBigNumberJSON),
+      true
+    );
+
+    assert.equal(
+      jsonHelper.isValid(beautifiedBigNumberJSON),
+      true
     );
   });
 
@@ -50,6 +65,11 @@ suite("Unit tests", () => {
       invalidJson,
       "Invalid Json should return itself"
     );
+
+    assert.equal(
+      jsonHelper.beautify(uglifiedBigNumberJSON, 2),
+      beautifiedBigNumberJSON,
+    );
   });
 
   test("Uglify JSON", () => {
@@ -57,6 +77,12 @@ suite("Unit tests", () => {
       jsonHelper.uglify(validBeautifiedJson4),
       validUglifiedUnescapedJson
     );
+
+    assert.equal(
+      jsonHelper.uglify(beautifiedBigNumberJSON),
+      uglifiedBigNumberJSON,
+    );
+
     assert.equal(
       jsonHelper.uglify(invalidJson),
       invalidJson,
@@ -69,6 +95,12 @@ suite("Unit tests", () => {
       jsonHelper.escape(validUglifiedUnescapedJson),
       validUglifiedEscapedJson
     );
+
+    assert.equal(
+      jsonHelper.escape(uglifiedBigNumberJSON),
+      uglifiedEscapedBigNumberJSON,
+    );
+
     assert.equal(
       jsonHelper.escape(invalidJson),
       invalidJson,
@@ -93,6 +125,12 @@ suite("Unit tests", () => {
       jsonHelper.unescape(validUglifiedEscapedJsonStringWithStartingQuote),
       validUglifiedUnescapedJson
     );
+
+    assert.equal(
+      jsonHelper.unescape(uglifiedEscapedBigNumberJSON),
+      uglifiedBigNumberJSON,
+    );
+
     assert.equal(
       jsonHelper.unescape(invalidJson),
       invalidJson,
