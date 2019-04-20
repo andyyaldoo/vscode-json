@@ -1,6 +1,6 @@
 # vscode-json README
 
-[![Build Status](https://travis-ci.org/andyyaldoo/vscode-json.svg?branch=travis)](https://travis-ci.org/andyyaldoo/vscode-json)
+[![Build Status](https://travis-ci.org/adharmawan/vscode-json.svg?branch=master)](https://travis-ci.org/adharmawan/vscode-json)
 [![downloads](https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)
 ![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)
 [![Known Vulnerabilities](https://snyk.io/test/github/andyyaldoo/vscode-json/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyyaldoo/vscode-json?targetFile=package.json)
