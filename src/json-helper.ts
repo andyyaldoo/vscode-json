@@ -1,3 +1,4 @@
+let JSON = require("json-bigint");
 export default class {
   /**
    * isValid
