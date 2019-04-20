@@ -26,7 +26,7 @@ suite("Unit tests", () => {
   let invalidJson = '{"name": "andy}';
 
   let uglifiedBigNumberJSON = `{"id1":365247355169013770,"id2":367559095164600330}`
-  let beautifiedBigNumberJSON = `\n  {"id1": 365247355169013770,\n  "id2": 367559095164600330\n}`
+  let beautifiedBigNumberJSON = `{\n  "id1": 365247355169013770,\n  "id2": 367559095164600330\n}`
   let uglifiedEscapedBigNumberJSON =`{\\"id1\\":365247355169013770,\\"id2\\":367559095164600330}`
   let beautifiedEscapedBigNumberJSON = `\n  {\"id1\": 365247355169013770,\n  \"id2\": 367559095164600330\n}`
 
