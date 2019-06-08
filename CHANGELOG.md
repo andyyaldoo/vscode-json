@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Format Selected text
 
-![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/format-selected-text.gif)
+![Demo GIF](https://raw.githubusercontent.com/adharmawan/vscode-json/master/images/format-selected-text.gif)
 
 ## [1.3.2] - 2017-11-19
 
