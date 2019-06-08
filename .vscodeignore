@@ -8,7 +8,6 @@ tsconfig.json
 vsc-extension-quickstart.md
 coverage
 .travis.yml
-node_modules
 .editorconfig
 coverconfig.json
 images
