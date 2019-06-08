@@ -39,22 +39,4 @@ So far none
 
 ## Release Notes
 
-### 1.0.0
-
-Initial release of vscode-json. Covers the 4 basic functionalities (Beautify/Uglify/Escape/Unescape)
-
-### 1.2.0
-
-Improve Unescape functionality. JSON string does not have to be wrapped in quotes.
-
-### 1.3.0
-
-Improve funcitonality. trim trailing and leading spaces before process text. Minor refactoring.
-
-### 1.4.0
-
-Format Selected text
-
-![Demo GIF](https://raw.githubusercontent.com/andyyaldoo/vscode-json/master/images/format-selected-text.gif)
-
----
+View [CHANGELOG.md](CHANGELOG.md)
