@@ -84,14 +84,14 @@
   "devDependencies": {
     "@types/glob": "^5.0.33",
     "@types/mocha": "^2.2.42",
-    "@types/node": "^7.0.43",
-    "decache": "^4.1.0",
-    "glob": "^7.1.2",
+    "@types/node": "^7.10.6",
+    "decache": "^4.5.1",
+    "glob": "^7.1.4",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "remap-istanbul": "^0.8.4",
     "typescript": "^2.5.3",
-    "vscode": "^1.1.33"
+    "vscode": "^1.1.34"
   },
   "dependencies": {
     "json-bigint": "^0.3.0"
