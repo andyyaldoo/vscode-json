@@ -1,8 +1,8 @@
 # vscode-json README
 
 ![Build](https://github.com/andyyaldoo/vscode-json/workflows/.github/workflows/build-test.yml/badge.svg)
-![downloads](https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)
-![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)
+[![downloads](https://img.shields.io/vscode-marketplace/d/andyyaldoo.vscode-json.svg)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)
+[![Visual Studio Marketplace](https://img.shields.io/vscode-marketplace/r/andyyaldoo.vscode-json.svg)](https://marketplace.visualstudio.com/items?itemName=andyyaldoo.vscode-json)
 [![Known Vulnerabilities](https://snyk.io/test/github/andyyaldoo/vscode-json/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyyaldoo/vscode-json?targetFile=package.json)
 
 This vscode extension beautify/uglify/escape/unescape JSON.
