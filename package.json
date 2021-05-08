@@ -94,6 +94,6 @@
     "vscode": "^1.1.37"
   },
   "dependencies": {
-    "json-bigint": "^0.3.1"
+    "json-bigint": "^1.0.0"
   }
 }
