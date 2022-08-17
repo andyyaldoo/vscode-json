@@ -2,7 +2,7 @@
   "name": "vscode-json",
   "displayName": "vscode-json",
   "description": "Beautify/Uglify/Escape/Unescape JSON",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "publisher": "andyyaldoo",
   "engines": {
     "vscode": "^1.17.0"
