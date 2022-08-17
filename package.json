@@ -88,12 +88,12 @@
     "decache": "^4.6.0",
     "glob": "^7.1.6",
     "istanbul": "^0.4.5",
-    "mocha": "^8.2.1",
+    "mocha": "^10.0.0",
     "remap-istanbul": "^0.13.0",
     "typescript": "^4.1.2",
     "vscode": "^1.1.37"
   },
   "dependencies": {
-    "json-bigint": "^0.3.1"
+    "json-bigint": "^1.0.0"
   }
 }
