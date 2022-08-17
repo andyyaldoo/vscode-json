@@ -17,11 +17,7 @@ export default class {
    * @param text
    */
   public escape(text: string): string {
-    return this.isValid(text)
-      ? JSON.stringify(text)
-          .replace(/^"/g, "")
-          .replace(/"$/g, "")
-      : text;
+    return JSON.stringify(text).replace(/^"/g, "").replace(/"$/g, "");
   }
 
   /**
